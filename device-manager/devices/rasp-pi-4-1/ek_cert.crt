@@ -1,0 +1,88 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 454180785 (0x1b123fb1)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = DE, O = Infineon Technologies AG, OU = OPTIGA(TM), CN = Infineon OPTIGA(TM) TPM 2.0 RSA CA 040
+        Validity
+            Not Before: Oct 18 13:11:33 2018 GMT
+            Not After : Dec 31 23:59:59 9999 GMT
+        Subject: 
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (2048 bit)
+                Modulus:
+                    00:c3:95:aa:bf:2c:90:4e:74:7a:18:b4:fb:bb:46:
+                    59:6b:6c:8a:68:47:54:aa:8b:f7:06:0e:a1:1c:46:
+                    20:4e:93:ab:9c:93:bc:9f:41:a6:1d:e3:38:84:7b:
+                    46:79:a4:61:1e:92:ba:7f:5e:af:d5:7e:2b:3a:7f:
+                    86:94:8b:be:87:79:14:14:ab:4e:5d:ba:b1:9c:be:
+                    45:87:a9:88:17:19:33:0f:63:10:9a:11:2f:bb:e4:
+                    87:b1:b1:d0:6c:57:72:ff:dd:d6:37:e9:7b:98:10:
+                    fb:c0:a7:4f:02:59:3f:fb:39:2d:8b:f0:84:63:3d:
+                    30:53:65:3b:f5:47:bb:79:62:56:9f:7f:f7:de:64:
+                    58:d6:32:91:89:cc:36:74:9c:cd:18:e4:50:e9:5f:
+                    93:3a:37:35:c8:09:e0:7c:d0:42:66:9c:91:23:5a:
+                    7c:12:35:5a:dd:ef:c0:83:c4:74:7b:69:aa:fc:8b:
+                    06:2f:a8:e2:5d:87:be:bb:f5:23:50:fa:70:4d:25:
+                    47:6f:bf:a8:36:dd:13:e1:71:ca:fc:06:cc:61:65:
+                    6c:52:59:ae:1f:63:c0:69:3c:71:46:e8:8e:fc:96:
+                    a1:dd:59:f9:fb:69:e3:13:ca:15:b2:e5:f2:f5:c9:
+                    9c:d3:dc:15:b5:23:21:01:e3:35:07:a5:97:8a:a4:
+                    08:01
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            Authority Information Access: 
+                CA Issuers - URI:http://pki.infineon.com/OptigaRsaMfrCA040/OptigaRsaMfrCA040.crt
+
+            X509v3 Key Usage: critical
+                Key Encipherment
+            X509v3 Subject Alternative Name: critical
+                DirName:/2.23.133.2.1=id:49465800/2.23.133.2.2=SLI 9670/2.23.133.2.3=id:0D0B
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 CRL Distribution Points: 
+
+                Full Name:
+                  URI:http://pki.infineon.com/OptigaRsaMfrCA040/OptigaRsaMfrCA040.crl
+
+            X509v3 Certificate Policies: 
+                Policy: 1.2.276.0.68.1.20.1
+
+            X509v3 Authority Key Identifier: 
+                keyid:44:F5:BB:D4:BD:90:41:A4:E8:5B:F7:8B:D4:DD:D0:08:05:40:39:B0
+
+            X509v3 Extended Key Usage: 
+                2.23.133.8.1
+            X509v3 Subject Directory Attributes: 
+                0.0...g....1.0...2.0.......
+    Signature Algorithm: sha256WithRSAEncryption
+         6d:35:15:f1:14:84:14:c3:82:bd:97:20:0b:d9:98:8d:ff:58:
+         a4:e1:14:e8:50:78:50:74:4d:6e:6e:f4:92:ff:56:87:e1:15:
+         2b:1d:86:bb:ad:59:9b:de:69:e0:7d:49:55:56:ea:1e:89:6c:
+         c3:94:74:e8:03:70:e8:3e:3c:88:3e:40:aa:20:8d:4d:9f:a5:
+         49:9a:8b:d2:92:f2:6a:b9:b2:0f:ea:42:d3:54:f2:13:7d:4d:
+         09:31:35:de:db:5d:11:fe:b9:4b:01:46:d1:b6:eb:18:59:b2:
+         72:f7:09:61:bd:e3:89:c1:b4:2b:b0:40:ea:4b:89:0f:ea:54:
+         e4:52:93:74:c3:e4:e9:d1:f3:dd:68:ed:92:87:bf:7c:9a:b9:
+         2a:8c:10:28:ab:3b:da:85:b2:43:ad:65:a9:13:de:ec:09:2c:
+         c4:52:e3:2f:d1:80:84:73:b1:93:9d:66:a1:9e:3e:55:7c:0a:
+         92:f8:8a:c3:ed:3a:28:19:c8:fe:a4:d2:e0:d9:10:67:02:a3:
+         b2:10:be:4a:8a:c4:aa:33:ff:31:03:6b:06:a0:68:c6:d5:9b:
+         78:e0:fc:a3:fc:03:55:14:c5:78:f6:45:ff:7f:01:30:6f:84:
+         d7:01:05:de:4d:7e:25:8b:e4:50:5b:e5:68:ea:99:75:4b:9b:
+         f6:a2:9b:ac:27:33:e7:f7:f8:46:d6:86:cb:8e:74:1b:64:2f:
+         cd:42:7c:91:f4:2b:b1:e0:25:f7:30:de:60:00:c3:8a:ee:32:
+         0b:77:cc:d6:aa:72:87:4a:e9:75:a8:65:9a:94:85:d3:c4:ea:
+         5f:ac:7a:2f:00:e5:46:fd:98:4d:b5:d7:13:ec:b8:6a:fb:f3:
+         9d:3b:a2:18:14:f4:e0:b3:14:84:71:b4:4b:1e:81:ef:a9:9c:
+         f3:65:da:40:f3:0b:4f:16:1a:4e:c5:34:1d:45:cb:3e:ea:21:
+         85:aa:7a:1c:4a:82:97:fb:a3:67:69:cb:aa:09:cd:f7:7e:6b:
+         44:7c:a8:94:06:9f:91:5b:5e:7f:19:0c:f5:1f:e8:a8:89:c0:
+         0e:ff:a1:f6:1b:92:d3:79:32:31:ba:fe:24:07:1a:2d:53:a7:
+         34:66:23:f8:8d:4b:32:7f:56:bf:7b:27:98:99:09:33:75:bd:
+         3e:71:b8:4d:ff:ac:b6:7e:df:f2:fb:1b:2c:d6:78:0f:d2:f0:
+         64:8f:d8:30:5b:44:e5:43:fd:b5:5b:3c:ec:34:fe:24:73:05:
+         29:7c:f1:57:b3:b1:1d:5e:5e:51:26:60:96:32:2d:02:b8:35:
+         e4:25:a5:d5:15:dd:19:9b:7b:02:f9:2b:ff:1a:85:48:c2:e0:
+         3d:7f:4e:cc:a9:f3:59:98
