@@ -1,1 +1,0 @@
-FIRST CONF: mode=ssl ca_file=/home/nzazzo/Scrivania/GlobalSignRootCA.crt server_name=google.com server_port=443
