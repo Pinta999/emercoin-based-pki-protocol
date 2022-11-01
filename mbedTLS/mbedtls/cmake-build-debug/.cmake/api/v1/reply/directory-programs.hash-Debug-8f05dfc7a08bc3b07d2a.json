@@ -1,0 +1,69 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"programs/hash/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 13,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/hash/generic_sum"
+			],
+			"targetId" : "generic_sum::@fe88f6e23c360cd58fd5",
+			"targetIndex" : 32,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/hash/hello"
+			],
+			"targetId" : "hello::@fe88f6e23c360cd58fd5",
+			"targetIndex" : 33,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/hash/md_hmac_demo"
+			],
+			"targetId" : "md_hmac_demo::@fe88f6e23c360cd58fd5",
+			"targetIndex" : 45,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "programs/hash",
+		"source" : "programs/hash"
+	}
+}

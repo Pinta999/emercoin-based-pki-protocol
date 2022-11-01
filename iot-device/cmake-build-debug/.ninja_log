@@ -1,0 +1,15 @@
+# ninja log v5
+0	39	1658012421452908009	CMakeFiles/protocol_client.dir/ownership.c.o	d4d421f3f51bd8d6
+1	31	1658254211434832221	CMakeFiles/protocol_client.dir/crypto.c.o	9258f5149b35817
+42	61	1658254211466833220	protocol_client	468c608c1180706b
+1	42	1658254211446832596	CMakeFiles/protocol_client.dir/initialization.c.o	79d3e42311417dc3
+0	32	1658251384082012574	CMakeFiles/protocol_client.dir/update.c.o	e4e53e2e397a0c7c
+0	43	1658012421456908049	CMakeFiles/protocol_client.dir/main.c.o	9a7dfb22f1c7dfa8
+1	44	1658012421460908088	CMakeFiles/protocol_client.dir/utils.c.o	6dacb7c043344964
+0	61	1663424937455009357	CMakeFiles/protocol_client.dir/utils.c.o	1e799e157ddc5d26
+0	61	1663424937455009357	CMakeFiles/protocol_client.dir/ownership.c.o	1ce7c1dfa22c0170
+0	62	1663424937455009357	CMakeFiles/protocol_client.dir/crypto.c.o	f0c06eaa6c4bb6d2
+0	63	1663424937459008977	CMakeFiles/protocol_client.dir/update.c.o	22b2cf21b202e14f
+0	66	1663424937459008977	CMakeFiles/protocol_client.dir/main.c.o	65753ceeba31b0f3
+0	85	1663424937479007091	CMakeFiles/protocol_client.dir/initialization.c.o	bfc2be8f7fd88e77
+85	146	1663424937539001432	protocol_client	16f9222ebe227648

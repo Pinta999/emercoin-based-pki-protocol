@@ -1,0 +1,292 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "programs/fuzz/fuzz_dtlsserver"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"programs/fuzz/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 38,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 42,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 39,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -Wall -Wextra -Wwrite-strings -Wformat=2 -Wno-format-nonliteral -Wvla -Wlogical-op -Wshadow -Wformat-signedness -Wformat-overflow=2 -Wformat-truncation -O0 -g3"
+				},
+				{
+					"fragment" : "-std=c99"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "/home/nzazzo/Scrivania/MBED-TLS/mbedtls/programs/fuzz/../../tests/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/nzazzo/Scrivania/MBED-TLS/mbedtls/include"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "99"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				17,
+				18
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "mbedtls_test::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "mbedtls::@25993c7f548492bbc626"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "mbedx509::@25993c7f548492bbc626"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "mbedcrypto::@25993c7f548492bbc626"
+		}
+	],
+	"id" : "fuzz_dtlsserver::@841510d08a378d40e5cf",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-Wall -Wextra -Wwrite-strings -Wformat=2 -Wno-format-nonliteral -Wvla -Wlogical-op -Wshadow -Wformat-signedness -Wformat-overflow=2 -Wformat-truncation -O0 -g3",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "library/libmbedtls.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "library/libmbedx509.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "library/libmbedcrypto.a",
+				"role" : "libraries"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "fuzz_dtlsserver",
+	"nameOnDisk" : "fuzz_dtlsserver",
+	"paths" : 
+	{
+		"build" : "programs/fuzz",
+		"source" : "programs/fuzz"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				17,
+				18
+			]
+		},
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "programs/fuzz/fuzz_dtlsserver.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/asn1_helpers.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/certs.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/hash.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/platform_builtin_keys.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/test_driver_aead.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/test_driver_asymmetric_encryption.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/test_driver_cipher.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/test_driver_key_management.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/test_driver_mac.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/drivers/test_driver_signature.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/fake_external_rng_for_test.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/helpers.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/psa_crypto_helpers.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/psa_exercise_key.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/random.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/mbedtls_test.dir/tests/src/threading_helpers.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "programs/fuzz/onefile.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "programs/fuzz/common.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

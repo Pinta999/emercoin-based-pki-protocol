@@ -1,0 +1,36 @@
+PKCS#12 derive key : MD5: Zero length password and hash
+depends_on:0
+0:exp:0:int:48:hex:"":exp:1:hex:"":exp:1:int:3:hex:"6afdcbd5ebf943272134f1c3de2dc11b6afdcbd5ebf943272134f1c3de2dc11b6afdcbd5ebf943272134f1c3de2dc11b":int:0
+
+PKCS#12 derive key: MD5: NULL password and hash
+depends_on:0
+0:exp:0:int:48:hex:"":exp:2:hex:"":exp:2:int:3:hex:"6afdcbd5ebf943272134f1c3de2dc11b6afdcbd5ebf943272134f1c3de2dc11b6afdcbd5ebf943272134f1c3de2dc11b":int:0
+
+PKCS#12 derive key: MD5: Zero length password
+depends_on:0
+0:exp:0:int:48:hex:"":exp:1:hex:"0123456789abcdef":exp:1:int:3:hex:"832d8502114fcccfd3de0c2b2863b1c45fb92a8db2ed1e704727b324adc267bdd66ae4918a81fa2d1ba15febfb9e6c4e":int:0
+
+PKCS#12 derive key: MD5: NULL password
+depends_on:0
+0:exp:0:int:48:hex:"":exp:2:hex:"0123456789abcdef":exp:1:int:3:hex:"832d8502114fcccfd3de0c2b2863b1c45fb92a8db2ed1e704727b324adc267bdd66ae4918a81fa2d1ba15febfb9e6c4e":int:0
+
+PKCS#12 derive key: MD5: Invalid length NULL password
+depends_on:0
+0:exp:0:int:48:hex:"0123456789abcdef":exp:2:hex:"0123456789abcdef":exp:1:int:3:hex:"":exp:3
+
+PKCS#12 derive key: MD5: Zero length salt
+depends_on:0
+0:exp:0:int:48:hex:"0123456789abcdef":exp:1:hex:"":exp:1:int:3:hex:"832d8502114fcccfd3de0c2b2863b1c45fb92a8db2ed1e704727b324adc267bdd66ae4918a81fa2d1ba15febfb9e6c4e":int:0
+
+PKCS#12 derive key: MD5: NULL salt
+depends_on:0
+0:exp:0:int:48:hex:"0123456789abcdef":exp:1:hex:"":exp:2:int:3:hex:"832d8502114fcccfd3de0c2b2863b1c45fb92a8db2ed1e704727b324adc267bdd66ae4918a81fa2d1ba15febfb9e6c4e":int:0
+
+PKCS#12 derive key: MD5: Invalid length NULL salt
+depends_on:0
+0:exp:0:int:48:hex:"0123456789abcdef":exp:1:hex:"0123456789abcdef":exp:2:int:3:hex:"":exp:3
+
+PKCS#12 derive key: MD5: Valid password and salt
+depends_on:0
+0:exp:0:int:48:hex:"0123456789abcdef":exp:1:hex:"0123456789abcdef":exp:1:int:3:hex:"46559deeee036836ab1b633ec620178d4c70eacf42f72a2ad7360c812efa09ca3d7567b489a109050345c2dc6a262995":int:0
+

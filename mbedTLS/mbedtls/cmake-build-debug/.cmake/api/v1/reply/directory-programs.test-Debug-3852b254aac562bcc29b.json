@@ -1,0 +1,93 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"programs/test/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 85,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/test/selftest"
+			],
+			"targetId" : "selftest::@6ffcf4fc3485ee952408",
+			"targetIndex" : 64,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/test/udp_proxy"
+			],
+			"targetId" : "udp_proxy::@6ffcf4fc3485ee952408",
+			"targetIndex" : 170,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/test/benchmark"
+			],
+			"targetId" : "benchmark::@6ffcf4fc3485ee952408",
+			"targetIndex" : 2,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/test/query_compile_time_config"
+			],
+			"targetId" : "query_compile_time_config::@6ffcf4fc3485ee952408",
+			"targetIndex" : 55,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"programs/test/zeroize"
+			],
+			"targetId" : "zeroize::@6ffcf4fc3485ee952408",
+			"targetIndex" : 171,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "programs/test",
+		"source" : "programs/test"
+	}
+}

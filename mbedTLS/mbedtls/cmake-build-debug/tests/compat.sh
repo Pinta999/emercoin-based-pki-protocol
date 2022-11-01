@@ -1,0 +1,1 @@
+/home/nzazzo/Scrivania/MBED-TLS/mbedtls/tests/compat.sh

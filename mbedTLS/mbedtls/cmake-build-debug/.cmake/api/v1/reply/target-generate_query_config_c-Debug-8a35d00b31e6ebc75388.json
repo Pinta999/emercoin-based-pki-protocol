@@ -1,0 +1,73 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target"
+		],
+		"files" : 
+		[
+			"programs/test/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 56,
+				"parent" : 0
+			}
+		]
+	},
+	"id" : "generate_query_config_c::@6ffcf4fc3485ee952408",
+	"name" : "generate_query_config_c",
+	"paths" : 
+	{
+		"build" : "programs/test",
+		"source" : "programs/test"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/programs/test/CMakeFiles/generate_query_config_c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/programs/test/CMakeFiles/generate_query_config_c.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/programs/test/query_config.c.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}
