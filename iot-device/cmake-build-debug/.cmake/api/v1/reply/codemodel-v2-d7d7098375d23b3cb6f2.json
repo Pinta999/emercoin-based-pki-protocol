@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/kali/Desktop/emercoin-based-pki-protocol/iot-device/cmake-build-debug",
-		"source" : "/home/kali/Desktop/emercoin-based-pki-protocol/iot-device"
+		"build" : "/home/nzazzo/Scrivania/emercoin-based-pki-protocol/iot-device/cmake-build-debug",
+		"source" : "/home/nzazzo/Scrivania/emercoin-based-pki-protocol/iot-device"
 	},
 	"version" : 
 	{

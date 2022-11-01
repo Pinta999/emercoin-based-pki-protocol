@@ -361,7 +361,7 @@ int gen_device_identity(unsigned char *hex_buf) {
         goto cleanup;
     }
     mbedtls_ctr_drbg_set_prediction_resistance( &ctr_drbg, MBEDTLS_CTR_DRBG_PR_OFF );
-    ret = mbedtls_ctr_drbg_write_seed_file( &ctr_drbg, "/home/kali/Desktop/dpki-protocol/iot-device/cli-build/rand/seedfile" );
+    ret = mbedtls_ctr_drbg_write_seed_file( &ctr_drbg, "/home/kali/Desktop/emercoin-based-pki-protocol/iot-device/cli-build/rand/seedfile" );
     if( ret != 0 )
     {
         printf( "failed in mbedtls_ctr_drbg_write_seed_file: %d\n", ret );
