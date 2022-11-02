@@ -37,7 +37,7 @@ def select_days_exp():
 
 
 def generate_mInit():
-    print("\nGenerating the initialization message M_init...")
+    print("\nGenerating the initialization message M_init...\n", end="")
     days_exp = select_days_exp()
     private_key = crypto.gen_rsa_key()
     pubkey_serialized = crypto.get_pubkey_bytes(crypto.get_pubkey_from_privkey(private_key))
@@ -53,26 +53,25 @@ def generate_mInit():
     }
     signature = crypto.sign_message(private_key, json.dumps(mInit).encode())
     mInit['signature'] = signature.hex()
-    print("[OK]\n")
     return mInit
 
 def verify_idevid(idevid):
-    print("\n[   TCG Device Identification Procedure   ]\n\n")
-    print("Extracting information from the TCG_CSR_IDEVID structure...\n")
+    print("\n\n[   TCG Device Identification Procedure   ]\n\n", end="")
+    print("Extracting information from the TCG_CSR_IDEVID structure...\n", end="")
     obj = json.loads(idevid, strict=False)
     csrContent = idevid.decode()[idevid.decode().find('{"hashAlgoId') : idevid.decode().find(', "signature"')]
     ekCert = idevid.decode()[idevid.decode().find("-----BEGIN") : idevid.decode().find('", "attestPub"')]
     prodModel = obj['csrContents']['prodModel']
     prodSerial = obj['csrContents']['prodSerial']
     identity = prodModel + '-' + str(int(prodSerial, 16))
-    print(f"Device model name and serial number: {identity}\n")
-    print(f"Verifying Endorsement Key certificate matching for {identity}...")
+    print(f"Device model name and serial number: {identity}\n", end="")
+    print(f"Verifying Endorsement Key certificate matching for {identity}...", end="")
     with open(f'devices/{identity}/ek_cert.pem', 'rb') as f:
         storedEkCert = f.read()
     if storedEkCert != ekCert.encode():
-        print("\nNon matching Endorsement Key Certificate\n")
+        print("\nNon matching Endorsement Key Certificate\n", end="")
         return
-    print("[OK]\n")
+    print("[OK]\n", end="")
     ectx = tpm2_pytss.ESAPI(tcti=None)
     iakPub, numBytes = tpm2_pytss.types.TPM2B_PUBLIC.unmarshal(bytes.fromhex(obj['csrContents']['attestPub']))    
     iakPem = iakPub.to_pem()
@@ -90,11 +89,9 @@ def verify_idevid(idevid):
         index = index + 1024
         payloadSize = payloadSize - 1024
     digest, ticket = ectx.sequence_complete(seqHandle, plaintext[index : index + payloadSize])
-    print("Verifying TCG_CSR_IDEVID message signature using the provided public Attestation Key...")
+    print("Verifying TCG_CSR_IDEVID message signature using the provided public Attestation Key...", end="")
     crypto.verify_signature(iakPubkey, signature, digest.__bytes__(), 'digest')
-    print("[OK]\n")
-
-    print(identity)
+    print("[OK]\n", end="")
     return (iakPub, obj, identity)
 
 
@@ -104,14 +101,14 @@ def make_credential(iakPub, idevidObj):
     iakPubName =  iakPub.get_name()
     #ekHandle = ectx.tr_deserialize(bytes.fromhex(idevidObj['csrContents']['serializedEk']))
     #print(ekHandle)
-    print("Generating the credential for the challenge...")
+    print("Generating the credential for the challenge...\n", end="")
     ek, numBytes = tpm2_pytss.types.TPM2B_PUBLIC.unmarshal(bytes.fromhex(idevidObj['csrContents']['serializedEk']))
     credential = tpm2_pytss.types.TPM2B_DIGEST(b'12345678912345678912345678912312')
-    print(f"Generated credential: {credential}\n")
+    print(f"Generated credential: {credential}\n", end="")
     #credentialBlob, secret = ectx.make_credential(ekHandle, credential, iakPubName)
-    print("Generating encrypted credential blob using TPM2_MakeCredential...")
+    print("Generating encrypted credential blob using TPM2_MakeCredential...", end="")
     credentialBlob, secret = tpm2_pytss.utils.make_credential(ek, credential, iakPubName)
-    print("[OK]\n")
+    print("[OK]\n", end="")
     credentialBytes = tpm2_pytss.TPM2B_ID_OBJECT.marshal(credentialBlob)  
     secretBytes = tpm2_pytss.TPM2B_ENCRYPTED_SECRET.marshal(secret)
     result = {
@@ -122,18 +119,18 @@ def make_credential(iakPub, idevidObj):
 
 
 def verify_encrypted_identity(message, deviceIakPem):
-    print("\n[   Encrypted identity message verification   ]\n\n")
+    print("\n[   Encrypted identity message verification   ]\n\n", end="")
     obj = json.loads(message)
-    print("Extracting information from the received message...\n")
+    print("Extracting information from the received message...\n", end="")
     encrypted_SN = obj['encrypted_SN']
     msg_signature = obj['signature']
     serialized_device_pubkey = obj['device_pubkey']
     dm_private_key = crypto.load_privkey_from_file('keys/privkey.pem')
-    print("Decrypting the ciphered generated identity using the provided public key...")
+    print("Decrypting the ciphered generated identity using the provided public key...", end="")
     plaintext = crypto.asym_decrypted_message(dm_private_key, bytes.fromhex(encrypted_SN))
-    print("[OK]\nRetrieving the public Attestation Key associated to the device...")
+    print("[OK]\nRetrieving the public Attestation Key associated to the device...", end="")
     deviceIak = crypto.get_pubkey_from_bytes(deviceIakPem)
-    print("[OK]\n")
+    print("[OK]\n", end="")
     signedMessage = json.dumps({
         'encrypted_SN': encrypted_SN,
         'cert_digest': obj['cert_digest'],
@@ -152,7 +149,7 @@ def verify_encrypted_identity(message, deviceIakPem):
         payloadSize = payloadSize - 1024
     digest, ticket = ectx.sequence_complete(seqHandle, signedMessage[index : index + payloadSize])
 
-    print("Verifying signature using device's public Attestation Key...")
+    print("Verifying signature using device's public Attestation Key...", end="")
     crypto.verify_signature(
         deviceIak,
         bytes.fromhex(msg_signature),
@@ -160,13 +157,13 @@ def verify_encrypted_identity(message, deviceIakPem):
         'digest'
     )
 
-    print("[OK]\nCorrect signature! (Verified using device IAK)\n")
+    print("[OK]\nCorrect signature! (Verified using device IAK)\n", end="")
     return hex(int(plaintext.decode(), 16))[2:].zfill(64)
     ##fill to 64
 
 
 def reg_confirmation(identity):
-    command = input(f'Please confirm registration for {identity} [y/n]: ')
+    command = input(f"\n\nPlease confirm registration for {identity} [y/n]: ")
     if (command.lower() == 'y'):
         return True
     elif (command.lower() == 'n'):
@@ -242,11 +239,11 @@ def deviceconf():
         return
 
     originalCredential, credentialMsg = make_credential(iakPub, idevidObj)
-    print("Sending the encrypted credential blob to the device...")
+    print("Sending the encrypted credential blob to the device...", end="")
     s.sendall(json.dumps(credentialMsg).encode())
-    print("[OK]\nWaiting for the solution of the challenge from the device...\n")
+    print("[OK]\nWaiting for the solution of the challenge from the device...\n", end="")
     returnedCredential =  s.recv(128)
-    print(f"Received challenge solution: {returnedCredential}\n")
+    print(f"Received challenge solution: {returnedCredential}\n", end="")
     if originalCredential == returnedCredential:
         print("Correct credential. Successful TPM key attestation!")
     else:
