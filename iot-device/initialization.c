@@ -841,9 +841,9 @@ int save_configuration(char *m_init, const int size, unsigned char *id) {
 /************************************/
 
 int initializazion(char *m_init, const int size, int sock) {
-    FILE *conf = fopen("cli-build/configuration", "r");
+    FILE *conf = fopen("configuration", "r");
     if (conf == NULL) {
-        printf("File not found: cli/configuration\n");
+        printf("File not found: configuration\n");
         return -1;
     }
     char status[16] = {0};
