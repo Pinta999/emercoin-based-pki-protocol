@@ -66,7 +66,7 @@
 			[
 				{
 					"backtrace" : 4,
-					"path" : "/home/kali/Desktop/emercoin-based-pki-protocol/mbedTLS/build_mbedtls/include"
+					"path" : "/home/nzazzo/Scrivania/emercoin-based-pki-protocol/iot-device/../mbedTLS/build_mbedtls/include"
 				}
 			],
 			"language" : "C",
@@ -104,11 +104,11 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-L/home/kali/Desktop/emercoin-based-pki-protocol/mbedTLS/build_mbedtls/library",
+				"fragment" : "-L/home/nzazzo/Scrivania/emercoin-based-pki-protocol/iot-device/../mbedTLS/build_mbedtls/library",
 				"role" : "libraryPath"
 			},
 			{
-				"fragment" : "-Wl,-rpath,/home/kali/Desktop/emercoin-based-pki-protocol/mbedTLS/build_mbedtls/library",
+				"fragment" : "-Wl,-rpath,/home/nzazzo/Scrivania/emercoin-based-pki-protocol/iot-device/../mbedTLS/build_mbedtls/library",
 				"role" : "libraries"
 			},
 			{

@@ -465,13 +465,26 @@ int create_tpm_idevid(ESYS_CONTEXT *ectx, char *jsonIdevid, int sock, ESYS_TR *i
             .csrContents.ekCert = {0},
             .csrContents.pad = {0},
     };
+
+    /* Retrieve model name and serial number */
+    FILE *fp = NULL;
+    char modelName[16] = {0};
+    int serialNumber;
+    fp = fopen("device-identity", "r");
+    if (fp == NULL) {
+        printf("File not found: device-identity\n");
+        return -1;
+    }
+    fscanf(fp, "%s %d", modelName, &serialNumber);
+    fclose(fp);
+
     size_t serializedEkSize = 0;
     Tss2_MU_TPM2B_PUBLIC_Marshal(outPublicEk, idevid.csrContents.serializedEk, 4096, &serializedEkSize);
     Tss2_MU_TPM2B_PUBLIC_Marshal(publicArea, idevid.csrContents.attestPub, 4096, &(idevid.csrContents.attestPubSz));
     idevid.csrContents.attestAttributes = publicArea->publicArea.objectAttributes;
-    strcpy(idevid.csrContents.prodModel, "kali-vm");
+    strcpy(idevid.csrContents.prodModel, modelName);
     idevid.csrContents.prodModelSz = sizeof(idevid.csrContents.prodModel);
-    idevid.csrContents.prodSerial = 0x00000001;
+    idevid.csrContents.prodSerial = serialNumber;
     idevid.csrContents.prodSerialSz = sizeof(int);
     strcpy(idevid.csrContents.ekCert, ekCertificate);
     idevid.csrContents.ekCertSz = strlen(ekCertificate);

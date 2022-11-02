@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 project(iot-device C)
 
-include_directories(/home/kali/Desktop/emercoin-based-pki-protocol/mbedTLS/build_mbedtls/include)
-link_directories(/home/kali/Desktop/emercoin-based-pki-protocol/mbedTLS/build_mbedtls/library)
+include_directories(../mbedTLS/build_mbedtls/include)
+link_directories(../mbedTLS/build_mbedtls/library)
 
 set(CMAKE_C_STANDARD 99)
 
