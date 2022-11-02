@@ -588,7 +588,7 @@ int create_tpm_idevid(ESYS_CONTEXT *ectx, char *jsonIdevid, int sock, ESYS_TR *i
 }
 
 int create_encrypted_identity_message(unsigned char *dm_pubkey_bytes, ESYS_CONTEXT *ectx, ESYS_TR iakHandle, ESYS_TR iakSession, char *output, unsigned char *id) {
-    printf("\n\n[   Encrypted identity message creation   ]\n");
+    printf("\n[   Encrypted identity message creation   ]");
 
     int ret = 1;
     int i;
