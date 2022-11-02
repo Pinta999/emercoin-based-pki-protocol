@@ -841,13 +841,13 @@ int save_configuration(char *m_init, const int size, unsigned char *id) {
 /************************************/
 
 int initializazion(char *m_init, const int size, int sock) {
-    FILE *fp = fopen("cli-build/configuration", "r");
-    if (fp == NULL) {
+    FILE *conf = fopen("cli-build/configuration", "r");
+    if (conf == NULL) {
         printf("File not found: cli/configuration\n");
         return -1;
     }
     char status[16] = {0};
-    fscanf(fp, "%*s %s", status);
+    fscanf(conf, "%*s %s", status);
     if (strcmp(status, "RUNNING") == 0) {
         printf("The device is already RUNNING. Can't accept M_init messages\n");
         return -1;
