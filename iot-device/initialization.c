@@ -244,6 +244,7 @@ int verify_minit(char *m_init, const int size, unsigned char **dm_pubkey_bytes) 
 }
 
 int create_tpm_idevid(ESYS_CONTEXT *ectx, char *jsonIdevid, int sock, ESYS_TR *iakHandle, ESYS_TR *iakSession) {
+    printf("\n\n[   TCG Device Identification Procedure   ]\n\n");
     TSS2_RC rc;
     TPM2B_SENSITIVE_CREATE inSensitive = {0};
 
@@ -407,6 +408,7 @@ int create_tpm_idevid(ESYS_CONTEXT *ectx, char *jsonIdevid, int sock, ESYS_TR *i
                               &objectHandle);
     }
 
+    printf("Retrieving Endorsement Key certificate...");
     TPM2B_PUBLIC *publicArea;
     TPM2B_NAME *name;
     unsigned char *ekCertificate = NULL;
@@ -443,6 +445,7 @@ int create_tpm_idevid(ESYS_CONTEXT *ectx, char *jsonIdevid, int sock, ESYS_TR *i
         free(ekCertNV);
     }
 
+    printf("[OK]\n");
 
     int i = 0, step = 0;
     rc = Esys_ReadPublic(ectx, objectHandle, ESYS_TR_NONE, ESYS_TR_NONE, ESYS_TR_NONE, &publicArea, &name, NULL);
@@ -585,6 +588,8 @@ int create_tpm_idevid(ESYS_CONTEXT *ectx, char *jsonIdevid, int sock, ESYS_TR *i
 }
 
 int create_encrypted_identity_message(unsigned char *dm_pubkey_bytes, ESYS_CONTEXT *ectx, ESYS_TR iakHandle, ESYS_TR iakSession, char *output, unsigned char *id) {
+    printf("\n\n[   Encrypted identity message creation   ]\n");
+
     int ret = 1;
     int i;
     char *p;
