@@ -53,7 +53,7 @@ def generate_mInit():
     }
     signature = crypto.sign_message(private_key, json.dumps(mInit).encode())
     mInit['signature'] = signature.hex()
-    printf("[OK]\n")
+    print("[OK]\n")
     return mInit
 
 def verify_idevid(idevid):
