@@ -470,7 +470,7 @@ int create_tpm_idevid(ESYS_CONTEXT *ectx, char *jsonIdevid, int sock, ESYS_TR *i
     FILE *fp = NULL;
     char modelName[16] = {0};
     int serialNumber;
-    fp = fopen("device-identity", "r");
+    fp = fopen("../device-identity", "r");
     if (fp == NULL) {
         printf("File not found: device-identity\n");
         return -1;
