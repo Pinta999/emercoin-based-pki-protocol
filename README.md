@@ -106,50 +106,57 @@ TPM 2.0 chip on each device. In case of a software TPM emulator, further
 details for the configuration will be provided in
 [Developer's manual](#Developers-manual))
 
-On the device side, the file must contain the model name and the serial
+On the device side, the file `iot-device/device identity` must contain the model name and the serial
 number of the device separated by a whitespace;
 
 On the side of the Device Manager, for every IoT device within the
-network, the folder must contain a subfolder whose name must be equal to
-the value stored on the file previously configured on the corresponding
+network, the folder `device-manager/devices` must contain a subfolder whose name must be equal to
+the value stored on the file `device_identity` previously configured on the corresponding
 device. This subfolders must contain a file called "configuration\",
 containing the following line
 
     status=INIT
 
 and the Endorsement Key (EK) certificate in PEM format. The Endorsement
-Key certificate can be retrieved from the device by using for the
+Key certificate can be retrieved from the device by using `tpm2-tools` for the
 execution of the following TPM2 command:
 
+    tpm2 nvread 0x01c00002 -o RSA EK cert.bin
+
 This command will save the RSA EK certificate in DER format in a file
-called . Then, it's possible to convert a DER certificate into a PEM
+called `RSA EK cert.bin`. Then, it's possible to convert a DER certificate into a PEM
 certificate by using the following OpenSSL command:
 
-Finally, the file must be moved from the device to the Device Manager
+    openssl x509 -inform DER -in RSA EK cert.bin -outform PEM -out ek cert.pem
+
+Finally, the `ek_cert.pem` file must be moved from the device to the Device Manager
 inside the corresponding subfolder.
 
-and can be installed on Debian-based Linux distributions with the
+`tpm2-tools` and `openssl` can be installed on Debian-based Linux distributions with the
 following commands:
+
+    sudo apt install tpm2-tools
+    sudo apt install openssl
 
 ## Device module
 
 The first module must run in background on each IoT device within the
 network and can be executed after the compilation by running
 
+    sudo ./iot-device/cli-build/iot-device
+
 This section of the application does not require any interaction with
 the final user: the device basically waits until the Device Manager
 sends a $M_{init}$, $M_{ownr}$ or $M_{updt}$ message. By default, the
-status (stored in ) of the device is set to : in this condition, the
+status (stored in `iot-device/cli-build/configuration`) of the device is set to `INIT`: in this condition, the
 device accepts the incoming $M_{init}$ messages, but when the
-certificate registration procedure is completed and the status is set to
+certificate registration procedure is completed and the status is set to `RUNNING`
 , the only accepted messages are $M_{ownr}$ and $M_{updt}$.
 
 ![Device-side application running example: device's certificate
-registration](images/chapter6/iot-application-running.PNG){#application-client-running
-width="90%"}
+registration](images/chapter6/iot-application-running.PNG)
 
-Figure [1](#application-client-running){reference-type="ref"
-reference="application-client-running"} reports the example of an
+Figure [1](#application-client-running) reports the example of an
 execution of the device software module: the application's logs
 summarize the entire execution flow already discussed in the previous
 chapters, also providing a step-by-step description of the TCG protocol
@@ -157,20 +164,17 @@ used for the identification of the IoT devices. In this example, the
 execution is stopped because on the other side the DM has to confirm the
 creation of a new Emercoin transaction before sending back the
 acknowledgement to the device (Figure
-[2](#dm-application-running){reference-type="ref"
-reference="dm-application-running"}). When the transaction is created
+[2](#dm-application-running)). When the transaction is created
 and validated by the Emercoin network, the acknowledgment is received
 and verified by the device: if no errors occur, the device can update
-its configuration file and finally store (in the DM's public key for
+its configuration file and finally store (in `iot-device/cli-build/keys/master pubkey.pem`) the DM's public key for
 eventual future interactions. It's important to notice that the
-directory won't include the Attestation Key generated during the
+directory `iot-device/cli-build/keys/` won't include the Attestation Key generated during the
 certificate registration procedure: this key is permanently stored
 inside the TPM and every cryptographic operation based on it, is
 interally managed by the application's code.
 
-Figure
-[\[configuration-file\]](#configuration-file){reference-type="ref"
-reference="configuration-file"} reports an example of a configuration
+The following example reports a configuration
 file for a device.
 
     STATUS RUNNING
@@ -182,14 +186,16 @@ stored on Emercoin NVS. The expiration date is calculated by adding the
 number of validity days to the current date at the time of the execution
 of the registration procedure. Practically, Emercoin measures the
 expiration date in number of blocks (further details in
-[3](#dm-module){reference-type="ref" reference="dm-module"}).
+[Device Manager module](#Device-Manager-Module)).
 
-## Device Manager module {#dm-module}
+## Device Manager module
 
-The second module () is for the Device Manager node. The application can
+The second module (`device-manager/`) is for the Device Manager node. The application can
 be run using Python 3, by executing the command
 
-when the current working directory is . In this case there's an initial
+    sudo python3 main.py
+
+when the current working directory is `device-manager/`. In this case there's an initial
 interactive command-line interface: here, the user can select the
 operation to perform on the IoT devices of its network. When the option
 is selected, the CLI requires to type the IP address of the interested
@@ -199,8 +205,7 @@ transaction is created, the application asks to the user for a final
 confirmation.
 
 ![Confirmation request before creating a new Emercoin
-transaction](images/chapter6/dm-application-running.png){#dm-application-running
-width="90%" height="67%"}
+transaction](images/chapter6/dm-application-running.png)
 
 For the certificate registration process, the user must first select the
 IP address of the device in the network; if the device is reachable, the
@@ -218,8 +223,7 @@ process. As long as the transaction is pending, it won't be possible to
 retrieve any information about it from the Blockchain.
 
 ![Emercoin Wallet: Transactions
-tab](images/chapter6/emercoin-transactions.png){#emercoin-transactions
-width="100%"}
+tab](images/chapter6/emercoin-transactions.png)
 
 The record on the top of this list represent the newly generated
 key-pair for our device. The symbol displayed on the left of the date
@@ -246,308 +250,36 @@ a general unit of measurement, 1 days is approximately corresponding to
 175 blocks.
 
 ![Emercoin Wallet: Manage Names tab containing the new name-value
-pair](images/chapter6/emercoin-manage-names.png){#emercoin-manage-names
-width="100%"}
+pair](images/chapter6/emercoin-manage-names.png)
 
 When the certificate registration process is successfully completed, the
 subfolder corresponding to the configured device should contain the
 following files:
 
-1.  : basically the same configuration file that's been already
+1.  `configuration`: basically the same configuration file that's been already
     discussed for the IoT device module;
 
-2.  : the device's TPM Endorsement Key certificate in PEM format (this
+2. `ek_cert.pem` : the device's TPM Endorsement Key certificate in PEM format (this
     must be already included before the execution of the certificate
     registration process);
 
-3.  : the device's Attestation Key created during the TCG procedure, in
+3.  `iak.pem`: the device's Attestation Key created during the TCG procedure, in
     PEM format;
 
-4.  : the RSA public key generated by the IoT device for the creation of
+4. `local_pubkey.pem` : the RSA public key generated by the IoT device for the creation of
     the self-signed X.509 certificate that is finally stored on the
     Blockchain;
 
 The other available operations (ownership transfer and certificate
 update) follow the same execution flow, but the ownership transfer
 protocol requires an additional preliminary step: the folder must
-include a file called containing the public key of the next device's
+include a file called `new_pubkey.pem` containing the public key of the next device's
 owner, in PEM format.
 
 Finally, the revoke operation is equivalent to the creation of a revoke
 transaction from the Emercoin Wallet. In this case, the application will
-ask for the name of the name,valuepair instead of the IP address of the
+ask for the name of the `<name,value>` pair instead of the IP address of the
 device like for the other operations.
-
-
-# Developer's manual
-
-The entire manual will
-be referred to a Debian-based Linux distribution as development
-environment. All the commands and procedures are based on this
-assumption.
-
-## Required software dependencies
-
-### TPM 2.0 Software Stack (TSS2) {#tss2-installation}
-
-It's strongly suggested to manually build the library, starting from the
-source code available on the official GitHub repository [@tss-lib]: this
-approach allows to select many configurable options before the
-installation. The installation process can be summarized by the
-following steps:
-
-1.  Clone the GitHub repository using
-
-2.  Install all the required dependencies by running the command
-    suggested in the file of the GitHub repository ("Ubuntu\" section);
-
-3.  Move the current working directory to the cloned repository, using
-
-4.  Run the bootstrap script ();
-
-5.  Configure the build using . In this step it will be possible to
-    select the configuration options mentioned before: the list of the
-    available options can be retrieved using
-
-6.  Compile the libraries using ;
-
-7.  Install the libraries using ;
-
-### Device Manager module dependencies
-
-The Device Manager software module requires Python3 to be executed.
-Python3 can be installed by running the following command:
-
-    sudo apt install python3
-
-In addition to the library required for both the modules of the
-application, the Device Manager module relies on some specific Python3
-packages. All the Python packages can be installed and managed using (a
-Python package manager). This tool can be installed by running the
-following command:
-
-    sudo apt install python3-pip
-
-Using , the packages can be installed by simply running . The required
-packages for the Device Manager module of the application are listed
-below:
-
--   : provides an interface to the Emercoin API (based on Bitcoin API);
-
--   : Python wrapper for library;
-
--   : Python module for cryptographic operations;
-
-The device-manager module is going to communicate with the Emercoin
-Blockchain by leveraging on a RPC server: the RPC server can be
-configured from the Emercoin wallet (it can be downloaded from the
-official Emercoin website [@downloadWallet]):
-
-1.  From the Emercoin wallet GUI toolbar, select "Settings\" "RPC\"
-    "emercoin.conf\". This will open the Emercoin wallet configuration
-    file;
-
-2.  Replace the content of the file with the following lines:
-
-            testnet=1
-            server=1
-            listen=1
-            rpcuser=user
-            rpcpassword=psw
-            rpcport=9092
-            rpcallowip=0.0.0.0/0
-
-3.  Save the changes and restart the wallet (note: the first time you
-    run the wallet, the option must be included)
-
-### Device module dependencies
-
-On the device side, in addition to the library, two more software
-dependencies must be satisfied: (further details on how to install the
-modified version of mbedTLS will be provided in
-[3](#building){reference-type="ref" reference="building"}) and , that
-simplifies the handling of JSON objects. The latter is a simple header
-file () that has been already included in the application (no additional
-steps are required).
-
-# Enabling TPM 2.0
-
-The library requires the presence of a TPM 2.0 chip to be used: for the
-implementation proposed in this work, the TPM 2.0 chip was already
-installed and configured on the Raspberry Pi 4 board. The purpose of
-this section is to provide the instructions to enable the TPM 2.0
-technology for two distinct scenarios:
-
-1.  Testing the application on any laptop/desktop machine whose
-    motherboard is featured with a TPM 2.0 chip;
-
-2.  Testing the application using a software TPM emulator;
-
-In the first case, the only required operation is to enable the TPM
-technology from the BIOS settings of the motherboard. This procedure can
-vary depending on the running BIOS. Figure
-[1](#tpm-bios){reference-type="ref" reference="tpm-bios"} shows an
-example of a BIOS tab where it's possible to enable/disable the TPM
-technology.
-
-![Example of a BIOS option for enabling TPM technology (source:
-[image](https://docs.oracle.com/cd/E19591-01/html/E23171/figures/Screen3_TCG-TPM_Support-YES.jpg))](images/chapter7/tpm_bios.jpg){#tpm-bios
-width="75%"}
-
-### Configuring the software TPM emulator
-
-The software TPM emulator is a good solution to the absence of a TPM 2.0
-chip, and it's very useful for experimental and study purposes. The
-configuration of the TPM emulator requires the following software
-dependencies:
-
--   : the software TPM emulator;
-
--   : TPM 2.0 Software Stack (installation steps described in
-    [1.1](#tss2-installation){reference-type="ref"
-    reference="tss2-installation"});
-
--   : for the management of the TPM context;
-
--   : CLI tools for executing TPM2 commands (installation: )
-
-First, the IBM's Software TPM 2.0 dependencies must be installed:
-
-    sudo apt install lcov \
-    pandoc autoconf-archive liburiparser-dev \
-    libdbus-1-dev libglib2.0-dev dbus-x11 \
-    libssl-dev autoconf automake \
-    libtool pkg-config gcc \
-    libcurl4-gnutls-dev libgcrypt20-dev libcmocka-dev uthash-dev \
-
-Then, the Software TPM can be downloaded by running the following
-command:
-
-    wget https://jaist.dl.sourceforge.net/project/ibmswtpm2/ibmtpm1661.tar.gz
-
-When the downloaded archive has been extracted, the command must be run
-within the directory of the Software TPM to start the compiling process.
-When the compiling process is completed, the generated binary file
-called must be moved to . Now, the Software TPM can be configured as a
-daemon service of the operative system with the following steps:
-
-1.  Create the daemon configuration file using
-
-    ()
-
-2.  Add the following content to the file
-
-            [Unit]
-                Description=TPM2.0 Simulator Server daemon
-                Before=tpm2-abrmd.service
-            [Service]
-                ExecStart=/usr/local/bin/tpm_server
-                Restart=always
-                Environment=PATH=/usr/bin:/usr/local/bin
-            [Install]
-                WantedBy=multi-user.target
-
-3.  Reload daemon and start the service using the following commands:
-
-            systemctl daemon-reload
-            systemctl start tpm-server.service
-
-The Software TPM is now installed and configured as a daemon service
-(the service's status can be checked with )
-
-The installation of the TPM2 ABRMD follows a similar procedure:
-
-1.  Download TPM2 ABRMD from the official GitHub repository
-    [@tpm2-abrmd] using ;
-
-2.  Extract the archive configure the installation:
-
-            cd tpm2-abrmd-2.3.1
-            sudo ldconfig
-            ./configure --with-dbuspolicydir=/etc/dbus-1/system.d --with-systemdsystemunitdir=/usr/lib/systemd/system
-
-3.  Start the installation process with
-
-4.  Add TPM2 ABRMD to the system services. During the previous step, a
-    sample service definition is placed under
-    /usr/local/share/dbus-1/system-services/. Copy it to the system
-    services directory:
-
-            sudo cp 
-            /usr/local/share/dbus-1/system-services/com.intel.tss2.Tabrmd.service 
-            /usr/share/dbus-1/system-services/
-
-5.  Restart DBUS with
-
-6.  Replace the content of with the following lines:
-
-            [Unit]
-                Descript=TPM2 Access Broker and Resource Management Daemon
-            [Service]
-                Type=dbus
-                Restart=always
-                RestartSec=5
-                BusName=com.intel.tss2.Tabrmd
-                StandardOutput=syslog
-                ExecStart=/usr/local/sbin/tpm2-abrmd --tcti="libtss2-tcti-mssim.so.0:host=127.0.0.1,port=2321"
-                User=tss
-            [Install]
-                WantedBy=multi-user.target
-
-7.  Run the service and check its state:
-
-            systemctl daemon-reload
-            systemctl start tpm2-abrmd.service
-            service tpm2-abrmd status
-
-Basically, the Software TPM 2.0 is now correctly working. Despite of
-this, one last operation is required to make the application work with
-the emulator: by default, the simulated TPM is not provisioned with
-X.509 certificate for the Endorsement Key. To fix this issue, it's
-enough to run the bash script . In order to successfully run this script
-(note: root privileges are required), and must be installed; moreover,
-the two system services previously configured (TPM2 ABRMD and Software
-TPM) must be active. The script will generate an Endorsement Key
-certificate using a "dummy\" local root CA, and permanently stores it on
-the proper TPM non-volatile area.
-
-## Building process {#building}
-
-When everything is correctly configured, that last required operation is
-to compile the project (only for the device module and the modified
-mbedTLS library). The compiling process is highly simplified thanks to .
-This tool can be installed with
-
-        sudo apt install cmake
-
-and it's a cross-platform compiler that allow to configure the building
-process by leveraging on a text file called . This file will include all
-the necessary declarations (e.g. libraries path) to properly build the
-project. In order to successfully compile the device application module,
-the mbedTLS library is required. The modified library will retrieve data
-from the Emercoin Blockchain, so it's necessary to specify the correct
-Emercoin RPC server address in the source code. This can be done by
-editing the IP address defined in the constant at line 49 of Then, the
-mbedTLS library can be compiled with the following steps using CMake:
-
-1.  Move inside directory;
-
-2.  Configure the building process with
-
-3.  Build mbedTLS using
-
-The binary files associated with each mbedTLS application, are included
-within subfolders. To compile the device application module using CMake,
-a similar procedure must be followed:
-
-1.  Move inside the directory of the device module ();
-
-2.  Configure the building process with
-
-3.  Build the module with
-
-The binary file for executing the application will be generated inside
-and it will be named .
 
 
 
