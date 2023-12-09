@@ -98,15 +98,13 @@ for the Device Manager. The IoT device module must be compiled to be
 executed and for both the modules the library and other secondary
 dependencies must be installed: the description of these operations is
 demanded to
-[\[developers-manual\]](#developers-manual){reference-type="ref"
-reference="developers-manual"}.
+[Developer's-manual](#Developer's-manual).
 
 It's important to perform some preliminary operations to successfully
 use the application. (Note: in this chapter we assume the presence of a
 TPM 2.0 chip on each device. In case of a software TPM emulator, further
 details for the configuration will be provided in
-[\[developers-manual\]](#developers-manual){reference-type="ref"
-reference="developers-manual"})
+[Developer's-manual](#Developer's-manual))
 
 On the device side, the file must contain the model name and the serial
 number of the device separated by a whitespace;
